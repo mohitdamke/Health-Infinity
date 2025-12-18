@@ -1,5 +1,6 @@
 package mohit.dev.healthinfinity.data
 
+import android.util.Log
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -9,6 +10,8 @@ class SignalDataSource {
 
     fun signalFlow(): Flow<Int> = flow {
         while (true) {
+            val value = Random.nextInt(0, 101)
+            Log.d("SignalDataSource", "Emitting value: $value")
             emit(Random.nextInt(0, 101))
             delay(100)
         }

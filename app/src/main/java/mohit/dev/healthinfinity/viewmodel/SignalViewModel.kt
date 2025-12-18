@@ -1,5 +1,6 @@
 package mohit.dev.healthinfinity.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +32,7 @@ class SignalViewModel(
     private fun updateSignal(value: Int) {
         val updatedPoints = (_uiState.value.points + value)
             .takeLast(300) // 30s window (100ms * 300)
+        Log.d("SignalViewModel", "New point added: $value, total points: ${updatedPoints.size}")
 
         _uiState.value = _uiState.value.copy(
             points = updatedPoints
