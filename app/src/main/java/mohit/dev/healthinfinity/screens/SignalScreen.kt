@@ -42,11 +42,13 @@ fun SignalScreen(
             )
         }
 
-    StylishSignalGraph(
+        StylishSignalGraph(
             points = state.points,
+            movingAverage = state.movingAverage,
             showMovingAverage = state.showMovingAverage,
             modifier = Modifier.fillMaxSize()
         )
+
     }
 
 }

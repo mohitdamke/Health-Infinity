@@ -10,8 +10,6 @@ class SignalDataSource {
 
     fun signalFlow(): Flow<Int> = flow {
         while (true) {
-            val value = Random.nextInt(0, 101)
-            Log.d("SignalDataSource", "Emitting value: $value")
             emit(Random.nextInt(0, 101))
             delay(100)
         }

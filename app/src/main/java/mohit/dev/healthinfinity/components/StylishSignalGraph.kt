@@ -2,24 +2,28 @@ package mohit.dev.healthinfinity.components
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
-import kotlin.math.min
-import kotlin.math.roundToInt
 
 @Composable
 fun StylishSignalGraph(
     points: List<Int>,
+    movingAverage: List<Float>,
     showMovingAverage: Boolean,
     modifier: Modifier = Modifier
 ) {
+    val gridPaint = Color.LightGray.copy(alpha = 0.3f)
+
     Box(
         modifier = modifier
             .background(Color.White)
@@ -32,11 +36,12 @@ fun StylishSignalGraph(
             val padding = 16.dp.toPx()
             val graphWidth = size.width - 2 * padding
             val graphHeight = size.height - 2 * padding
-            val stepX = graphWidth / (points.size - 1)
+            val stepX = if (points.size > 1) {
+                graphWidth / (points.size - 1)
+            } else 0f
 
             // Draw subtle grid
             val horizontalLines = 5
-            val gridPaint = Color.LightGray.copy(alpha = 0.3f)
             for (i in 0..horizontalLines) {
                 val y = padding + i * (graphHeight / horizontalLines)
                 drawLine(gridPaint, Offset(padding, y), Offset(size.width - padding, y), 1f)
@@ -77,18 +82,20 @@ fun StylishSignalGraph(
             }
 
             // Moving average
-            if (showMovingAverage && points.size >= 10) {
+            if (showMovingAverage && movingAverage.isNotEmpty()) {
                 val avgPath = Path()
-                val window = 10
-                points.forEachIndexed { index, _ ->
-                    if (index >= window - 1) {
-                        val avg = points.subList(index - window + 1, index + 1).average()
-                        val x = padding + index * stepX
-                        val y = padding + graphHeight - (avg.toFloat() / maxValue) * graphHeight
-                        if (index == window - 1) avgPath.moveTo(x, y) else avgPath.lineTo(x, y)
-                    }
+                val offset = points.size - movingAverage.size
+
+                movingAverage.forEachIndexed { index, avg ->
+                    val x = padding + (index + offset) * stepX
+                    val y = padding + graphHeight - (avg / maxValue) * graphHeight
+                    if (index == 0) avgPath.moveTo(x, y) else avgPath.lineTo(x, y)
                 }
-                drawPath(avgPath, color = Color.Red, style = Stroke(width = 3f, cap = StrokeCap.Round))
+                drawPath(
+                    avgPath,
+                    color = Color.Red,
+                    style = Stroke(width = 3f, cap = StrokeCap.Round)
+                )
             }
         }
     }
