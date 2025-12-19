@@ -102,17 +102,14 @@ git clone https://github.com/yourusername/real-time-signal-visualizer.git
 
 | Live Graph                                 | Moving Average Overlay                           |
 | ------------------------------------------ | ------------------------------------------------ |
-| ![Graph Screenshot](screenshots/graph.png) | ![MA Screenshot](screenshots/moving_average.png) |
-
-*Replace screenshots above with actual images.*
+|(![HealthVertical](https://github.com/user-attachments/assets/ef5dad81-61eb-4955-bbc3-3acbee2ab8cd)) | (![HealthHorizontal](https://github.com/user-attachments/assets/6a269134-128f-478a-aeb0-f016311fb73f)
+) |
 
 ---
 
 ## Optional Demo Video
 
-[![Demo Video](screenshots/demo_video.png)](https://your-video-link.com)
-
-*Click to view demo of real-time updates and smooth performance.*
+[![Demo App Video](https://github.com/user-attachments/assets/08dd1166-4261-4ec6-bf52-247e2a73a1e7)](https://github.com/your-username/your-repo-name/raw/main/demo-video.mp4)
 
 ---
 
