@@ -109,13 +109,10 @@ git clone https://github.com/yourusername/real-time-signal-visualizer.git
 
 ## Optional Demo Video
 
-<p align="center">
-  <a href="https://github.com/your-username/your-repo-name/raw/main/demo-video.mp4">
-    <img src="https://github.com/user-attachments/assets/08dd1166-4261-4ec6-bf52-247e2a73a1e7" alt="Demo App Video" width="600"/>
-  </a>
-</p>
 
-> Click on the thumbnail to watch the demo video
+
+https://github.com/user-attachments/assets/369f5ca2-4b99-467b-98c2-b410f7426e71
+
 
 
 ---
